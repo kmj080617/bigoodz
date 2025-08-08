@@ -25,4 +25,52 @@
   </div>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>게시판</title>
+  <style>
+    body { font-family: Arial; background: #fafafa; }
+    .container { max-width: 800px; margin: auto; padding: 20px; }
+    .post { background: white; margin: 10px 0; padding: 15px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .post a { text-decoration: none; color: #333; font-weight: bold; }
+    .write-btn { margin-top: 20px; display: inline-block; padding: 10px 20px; background: #333; color: white; border-radius: 6px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="boardTitle">게시판</h1>
+    <div id="postList"></div>
+    <a href="#" class="write-btn" onclick="alert('글쓰기 기능은 아직 구현되지 않았어요 😅')">+ 새 글 쓰기</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category') || 'free';
+
+    const boardNames = {
+      free: "자유게시판",
+      tech: "IT·기술 게시판",
+      games: "게임 게시판"
+    };
+
+    document.getElementById('boardTitle').innerText = boardNames[category];
+
+    // 예시 게시글 목록
+    const dummyPosts = [
+      { id: 1, title: "첫 번째 글입니다", author: "익명1" },
+      { id: 2, title: "두 번째 글이에요", author: "익명2" }
+    ];
+
+    const postList = document.getElementById('postList');
+    dummyPosts.forEach(post => {
+      const div = document.createElement('div');
+      div.className = 'post';
+      div.innerHTML = `<a href="post.html?id=${post.id}">${post.title}</a><br><small>작성자: ${post.author}</small>`;
+      postList.appendChild(div);
+    });
+  </script>
+</body>
+</html>
 
